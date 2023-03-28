@@ -8,12 +8,19 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import { Switch } from 'react-router-dom/cjs/react-router-dom';
 import { Route } from 'react-router-dom';
+import { useEffect,useState } from 'react';
+
 function App() {
+  const[user,setUser]=useState('');
+  useEffect(() => {
+    setUser(localStorage.getItem('userName')?localStorage.getItem('userName'):'');
+  },[]);
+
   return (
     <>
       <Switch>
         <Route exact path={'/'}>
-          <Home />
+          {user?<Home />:<Login setUser={setUser}/>}
         </Route>
         <Route path={'/login'}>
           <Login />

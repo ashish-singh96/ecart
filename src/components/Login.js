@@ -1,58 +1,49 @@
-import React,{useState} from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom';
 
-const Login = () => {
-    /*
-    first way
-    const [username, setUserName] = useState('');
-    const [password, setpassword] = useState('');
+const Login = (props) => {
+    const history = useHistory();
+    const [logInDetails, setOriginalDetails] = useState({
+        userName: '',
+        password: '',
+    });
 
-    const handleUserName=(event)=>{
-        setUserName(event.target.value);
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setOriginalDetails({ ...logInDetails, [name]: value });
     }
-    const handlePassword=(event)=>{
-        setpassword(event.target.value);
-    }
-    const handleSubmit=(event)=>{
+    const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(username);
-        console.log(password);
+        console.log(logInDetails);
+        if (logInDetails.userName != '' && logInDetails.password != '') {
+            localStorage.setItem("userName", logInDetails.userName);
+            props.setUser(logInDetails.userName);
+            history.push('/');
+        }else{
+            alert("please fill all details");
+        }
     }
-    */
-
-   const[logInDetails,setOriginalDetails]=useState({
-    userName:'',
-    password:'',
-   });
-   const handleChange = (event)=>{
-    const{name,value}=event.target;
-    setOriginalDetails({...setOriginalDetails,[name]:value});
-   }
-   const handleSubmit=(event)=>{
-        event.preventDefault();
-        console.log(setOriginalDetails);
-   }
 
     return (
         <div className='home'>
-            <form className='myform'>
+            <div className='myform'>
                 <div className="mb-3">
                     <label className="form-label" >UserName</label>
-                    <input type="text" name="username"  onChange={(event=>handleChange(event))} className="form-control" placeholder='username' />
+                    <input type="text" name="userName" onChange={(event => handleChange(event))} className="form-control" placeholder='username' />
                 </div>
 
                 <div className="mb-3">
                     <label className="form-label">Password</label>
-                    <input type="password" name="phone" onChange={(event=>handleChange(event))}className="form-control" placeholder='password' />
+                    <input type="password" name="password" onChange={(event => handleChange(event))} className="form-control" placeholder='password' />
                 </div>
 
 
 
 
-                <button  onClick={(e)=> handleSubmit(e)} className="btn btn-dark">Login</button>
+                <button onClick={(e) => handleSubmit(e)} className="btn btn-dark">Login</button>
                 <p><Link to={'/signup'}>New User Registration</Link></p>
-            </form>
-            
+            </div>
+
         </div>
     )
 }
