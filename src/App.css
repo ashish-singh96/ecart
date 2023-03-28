@@ -1,0 +1,19 @@
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.home{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.myform{
+   align-items: center;
+   margin-top: 30px;
+   width: 300px;
+   height: auto;
+   
+   align-items: center;
+}
