@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     /*
@@ -49,8 +50,9 @@ const Login = () => {
 
 
                 <button  onClick={(e)=> handleSubmit(e)} className="btn btn-dark">Login</button>
+                <p><Link to={'/signup'}>New User Registration</Link></p>
             </form>
-
+            
         </div>
     )
 }

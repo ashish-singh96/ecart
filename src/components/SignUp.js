@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { Link } from 'react-router-dom';
 import Login from './Login';
 
 const SignUp = () => {
@@ -78,7 +79,7 @@ const SignUp = () => {
   
   
   <button className="btn btn-primary" onClick={(e)=>handleSubmit(e)}>SignUp</button>
-  <p>already have an account ?</p>
+  <p><Link to={'/login'}>already have an account ?</Link> </p>
 </form>
       
     </div>
