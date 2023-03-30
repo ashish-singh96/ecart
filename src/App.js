@@ -1,14 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
-import Menu from './components/Menu';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import { Switch } from 'react-router-dom/cjs/react-router-dom';
 import { Route } from 'react-router-dom';
 import { useEffect,useState } from 'react';
+import Navbar from './components/Navbar';
 
 function App() {
   const[user,setUser]=useState('');
@@ -18,22 +17,23 @@ function App() {
 
   return (
     <>
+    {user ? <Navbar name={user} setUser={setUser}/>:<></>}
       <Switch>
         <Route exact path={'/'}>
-          {user?<Home />:<Login setUser={setUser}/>}
+          {user?<Home/>:<Login setUser={setUser}/>}
         </Route>
         <Route path={'/login'}>
-          <Login />
+           <Login setUser={setUser}/>
         </Route>
         <Route path={'/signup'}>
           <SignUp />
         </Route>
         <Route path={'/contact'}>
-          <Contact />
+         {user ?<Contact/>:<Login setUser={setUser}/>}
         </Route>
 
-        <Route path={'about'}>
-          <About />
+        <Route path={'/about'}>
+        {user ?<About/>:<Login setUser={setUser}/>}
         </Route>
 
       </Switch>
