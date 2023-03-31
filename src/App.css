@@ -17,4 +17,45 @@
    
    align-items: center;
 }
+.btnCard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.card-img-top{
+  height: 130px;
+  object-fit: cover;
+}
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px; 
+}
+.showproduct{
+  height: auto;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: row;
+  flex-flow: wrap;
+}
+
+
+
 
