@@ -19,6 +19,12 @@ const Home = (props) => {
       .then(json => setProduct(json))
   }
 
+  const getAllProductCategory = (item) => {
+    fetch(`https://fakestoreapi.com/products/category/${item}`)
+      .then(res => res.json())
+      .then(json => setProduct(json))
+  }
+
   useEffect(() => {
     getCategories();
     getAllProduct();
@@ -32,27 +38,34 @@ const Home = (props) => {
               categories.map((item) => {
                 return (
                   <li className="nav-item">
-                    <button type="button" >{item}</button>
+                    <button onClick={() => getAllProductCategory(item)} type="button" >{item}</button>
                   </li>
+
                 )
+
+
               })
             }
+            <li className="nav-item">
+              <button onClick={() => getAllProduct()} >All Product</button>
+            </li>
+
           </ul>
         </div>
       </nav>
 
       <div className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-        <ul className="showproduct">
+        <ul className="showproduct navbar-nav ">
           {
             products.map((item) => {
               return (
                 <li className="nav-item">
-                  <div className="card" style={{ width: "14rem",margin:"10px" }}>
+                  <div className="card" style={{ width: "20rem", height:"25rem", margin: "10px" }}>
                     <img className="card-img-top" src={item.image} alt="Card image cap" />
                     <div className="card-body">
                       <h3 className="card-price" >${item.price}</h3>
-                      <h5 className="card-title">{item.title.split(' ').slice(0,4).join(' ')}</h5>
-                   
+                      <h5 className="card-title">{item.title.split(' ').slice(0, 4).join(' ')}</h5>
+
                       <ReadMoreReact text={item.description}
                         min={50}
                         ideal={50}
@@ -60,9 +73,9 @@ const Home = (props) => {
                         readMoreText={"read more"} />
 
                       {/* <a href="#" className="btn btn-primary">Add to Cart</a> */}
-                      <div className='btnCard' >
-                        <button  class="btn  btn-sm btn-warning">Add to Cart</button>
-                        <button  class="btn btn-sm btn-info">Buy Now</button>
+                      <div className='btnCard' style={{position:"absolute",bottom:"0"}} >
+                        <button class="btn  btn-sm btn-warning" style={{marginBottom:"15px"}}>Add to Cart</button>
+                        <button class="btn btn-sm btn-info" style={{marginBottom:"15px",marginLeft:"15px"}}>Buy Now</button>
                       </div>
                     </div>
                   </div>
