@@ -1,7 +1,12 @@
 import React,{useState} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from "axios";
+
+import { backendUrl } from '../env';
+
 
 const SignUp = () => {
+  const history=useHistory();
     /*
     const [username,setUserName]=useState('');
     const [phone,setPhone]=useState('');
@@ -33,6 +38,7 @@ const SignUp = () => {
     }
     */
     const[logInDetails,setOriginalDetails]=useState({
+
         userName:'',
         phonenumber:'',
         emailid:'',
@@ -44,10 +50,28 @@ const SignUp = () => {
         setOriginalDetails({...logInDetails,[name]:value});
        }
 
-      const handleSubmit=(event)=>{
+      const handleSubmit=async (event)=>{
         event.preventDefault();
-        console.log(logInDetails);
-      }
+        if(logInDetails.name  && logInDetails.emailid && logInDetails.password && logInDetails.phonenumber){
+          await axios.post(`${backendUrl}/SignUp`,logInDetails)
+          .then((res) =>{
+               if(res.status===200){
+                history.pushState('./Login.js');
+               }else{
+                console.log("Something went wrong");
+               }
+          }).catch((err) =>{
+            console.log(err);
+          })
+        }else{
+          alert("please fill all details")
+        }
+    }
+
+        
+        
+
+      
 
   return (
     <div className='home'>
@@ -77,7 +101,7 @@ const SignUp = () => {
 
   
   
-  <button className="btn btn-primary" onClick={(e)=>handleSubmit(e)}>SignUp</button>
+  <button className="btn btn-primary" onClick={(event=>handleSubmit(event))}>SignUp</button>
   <p><Link to={'/login'}>already have an account ?</Link> </p>
 </form>
       
